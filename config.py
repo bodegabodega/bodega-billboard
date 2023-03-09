@@ -1,3 +1,0 @@
-config = {
-  'environment': 'development'
-}

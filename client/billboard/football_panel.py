@@ -27,18 +27,22 @@ class FootballPanel(Panel):
 
     if out is None:
       if config['environment'] == 'development':
-        data = Fake_Requests('/data/arsenal.json').json()
+        data = Fake_Requests('/data/arsenal.json').json() 
       else:
+        # url = 'https://nupwhs7rhuplxmblga2s6k4t3y0wpepy.lambda-url.us-east-1.on.aws?season=' + str(self.season) + '&team=' + str(self.team) + '&league=' + str(self.league)
+        # print(url)
         headers = {"x-rapidapi-key": secrets['rapidapi_key']}
         data = network.fetch('https://v3.football.api-sports.io/teams/statistics?season=' + str(self.season) + '&team=' + str(self.team) + '&league=' + str(self.league), headers=headers).json()
+     
+        # data = network.fetch(url).json()
       out = {
-        'team': network.json_traverse(data, ['response', 'team', 'name']),
-        'form': network.json_traverse(data, ['response', 'form']),
-        'wins': network.json_traverse(data, ['response', 'fixtures', 'wins', 'total']),
-        'losses': network.json_traverse(data, ['response', 'fixtures', 'loses', 'total']),
-        'draws': network.json_traverse(data, ['response', 'fixtures', 'draws', 'total']),
-        'goals_for': network.json_traverse(data, ['response', 'goals', 'for', 'total', 'total']),
-        'goals_against': network.json_traverse(data, ['response', 'goals', 'against', 'total', 'total']),
+        'team': network.json_traverse(data, ['name']),
+        'form': network.json_traverse(data, ['form']),
+        'wins': network.json_traverse(data, ['totalWins']),
+        'losses': network.json_traverse(data, ['totalLoses']),
+        'draws': network.json_traverse(data, ['totalDraws']),
+        'goals_for': network.json_traverse(data, ['totalGoalsFor']),
+        'goals_against': network.json_traverse(data, ['totalGoalsAgainst']),
       }
       del data
       gc.collect()

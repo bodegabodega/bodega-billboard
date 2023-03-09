@@ -13,8 +13,8 @@ class Panels():
     self.network = matrixportal.network
     
     self.panel_manager = PanelManager()
-    self.panel_manager.add_panel(FootballPanel())
     self.panel_manager.add_panel(DateTimePanel())
+    self.panel_manager.add_panel(FootballPanel())
     # self.panel_manager.add_panel(WeatherPanel('Hoboken', '40.7435', '-74.0291'))
     # self.panel_manager.add_panel(WeatherPanel('Lavalette', '39.9704', '74.0687'))
 

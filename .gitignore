@@ -1,5 +1,13 @@
 .vscode
-secrets.py
-boot_out.txt
 .DS_Store
 design
+
+client/secrets.py
+client/boot_out.txt
+
+# package directories
+service/node_modules
+service/jspm_packages
+
+# Serverless directories
+service/.serverless
